@@ -1,0 +1,9 @@
+<% if local_assigns.has_key? :errors %>
+  <% if errors.any? %>
+    <div class="bg-red-lightest border-l-4 border-red text-red-dark p-4 mb-4 text-left">
+      <% errors.each do |msg| %>
+        <p class="mb-0"><%= msg %></p>
+      <% end %>
+    </div>
+  <% end %>
+<% end %>
