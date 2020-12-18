@@ -1,42 +1,31 @@
 <div class="row">
-  <div class="col-sm-6">
-    <h1>Posts</h1>
-  </div>
-
-  <div class="col-sm-6 text-right">
-  <%= link_to new_post_path, class: 'btn btn-primary' do %>
-    Add New Post
-  <% end %>
-  </div>
-</div>
-
-<div class="table-responsive">
-  <table class="table table-striped table-bordered table-hover">
-    <thead>
-      <tr>
-    
-
-            <th>Title</th>
-            <th>Content</th>
-            
-          <th></th>
-        
-      </tr>
-    </thead>
-
-    <tbody>
-      <% @posts.each do |post| %>
-        <%= content_tag :tr, id: dom_id(post), class: dom_class(post) do %>
-          
-
-                      <td><%= post.title %></td>
-                      <td><%= post.content %></td>
-          
-          
-            <td><%= link_to 'Show', post, class: "btn btn-danger" %></td>
-          
-        <% end %>
+    <div class="col-sm">
+      <h1>Posts</h1>
+    </div>
+    <div class="col-sm text-right mt-2">
+      <%= link_to new_post_path, class: 'btn btn-primary', method: :get do %>
+        Criar Post
       <% end %>
-    </tbody>
-  </table>
+    </div>
 </div>
+
+<table class="table table-bordered table-hover">
+  <thead> 
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">Título</th>
+      <th scope="col">Conteúdo</th>
+      <th scope="col">Ações</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @posts.each do |post| %>
+      <tr>
+        <th scope="row"><%= post.id %></th>
+        <td><%= post.title %></td>
+        <td><%= post.content %></td>
+        <td><%= link_to 'Mostrar', post, class: "btn btn-success" %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

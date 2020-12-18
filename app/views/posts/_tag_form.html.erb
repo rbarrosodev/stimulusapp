@@ -1,0 +1,9 @@
+<%= form_with model: tag, data: { action: "ajax:success->tags#createSuccess ajax:error->tags#createError" } do |t| %>
+  <div data-tags-target="tagErrors"></div>
+  <div class="ml-2 mt-2">
+    <h4 class="text-center">Criar tag</h4>
+    <%= t.label :name, "Nome da Tag:", class: "mt-2" %>
+    <%= t.text_field :name, data: { target: 'tags.tagName' } %>
+    <%= t.submit style: 'display: block', class: "btn btn-primary mt-2" %>
+  </div>
+<% end %>

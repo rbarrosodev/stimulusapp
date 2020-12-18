@@ -1,51 +1,37 @@
-<div data-controller="tags">
-  <%= simple_form_for(post) do |f| %>
-    <% if post.errors.any? %>
-      <div id="error_explanation">
-        <h2><%= pluralize(post.errors.count, "erro", plural: "erros") %> impediram esse post de ser salvo:</h2>
+<%= simple_form_for(post) do |f| %>
+  <% if post.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(post.errors.count, "erro", plural: "erros") %> impediram esse post de ser salvo:</h2>
 
-        <ul>
-        <% post.errors.full_messages.each do |message| %>
-          <li><%= message %></li>
-        <% end %>
-        </ul>
-      </div>
-    <% end %>
-
-    <div class="form-group">
-      <%= f.input :title %>
-    </div>
-
-    <div class="form-group">
-      <%= f.input :content %>
-    </div>
-
-    <div class="form-group">
-      <div data-tags-target="tagList">
-        <%= f.label :tag_ids, label: 'Tags para o post:' %><br>
-        <%= f.collection_check_boxes :tag_ids, Tag.all, :id, :name, include_hidden: false do |box| %>
-          <%= box.check_box %>
-          <%= box.label %>
-          <br>
-        <% end %>
-      </div>
-    </div>
-
-    <div class="form-actions">
-      <%= f.button :submit, class: "btn-primary" %>
-      <%= link_to 'Back', posts_path, class: "btn btn-danger" %>
+      <ul>
+      <% post.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
     </div>
   <% end %>
 
-  <br><br>
+  <div class="form-group">
+    <%= f.input :title %>
+  </div>
 
-  <h4>Criar tag</h4>
-  <%= form_with model: @tag, data: { action: "ajax:success->tags#createSuccess ajax:error->tags#createError" } do |t| %>
-    <div data-tags-target="tagErrors"></div>
-    <div>
-      <%= t.label :name, "Nome da Tag:" %>
-      <%= t.text_field :name, data: { target: 'tags.tagName' } %>
-      <%= t.submit style: 'display: block' %>
+  <div class="form-group">
+    <%= f.input :content %>
+  </div>
+
+  <div class="form-group">
+    <div data-tags-target="tagList">
+      <%= f.label :tag_ids, label: 'Tags para o post:' %> <button class="btn btn-primary" id="menu-toggle">Criar tag</button><br>
+      <%= f.collection_check_boxes :tag_ids, Tag.all, :id, :name, include_hidden: false do |box| %>
+        <%= box.check_box %>
+        <%= box.label %>
+        <br>
+      <% end %>
     </div>
-  <% end %>
-</div>
+  </div>
+
+  <div class="form-actions">
+    <%= f.button :submit, class: "btn-primary" %>
+    <%= link_to 'Back', posts_path, class: "btn btn-danger" %>
+  </div>
+<% end %>
